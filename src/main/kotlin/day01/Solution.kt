@@ -13,4 +13,9 @@ class Solution {
         }
         return total;
     }
+
+    fun part1(): Int {
+        val input = File("src/main/kotlin/day01/input.txt").readLines().map { it.toInt() }
+        return getNumberOfDepthIncreases(input);
+    }
 }

@@ -50,4 +50,11 @@ class SolutionTests {
 
         assertEquals(7, result);
     }
+
+    @Test
+    fun part1_returnsCorrectAnswer() {
+        val result = sut.part1();
+
+        assertEquals(1624, result);
+    }
 }
