@@ -5,25 +5,12 @@ import java.io.File
 // https://adventofcode.com/2021/day/1
 class Solution {
 
-    fun getNumberOfDepthIncreases(depths: List<Int>): Int {
-        var total = 0;
-        for (i in 0 until depths.size - 1) {
-            if (depths[i] < depths[i + 1]) {
-                total++;
-            }
-        }
-        return total;
-    }
+    fun getNumberOfDepthIncreases(depths: List<Int>): Int = countWindowIncreases(depths, 2)
 
-    fun getNumberOfWindowDepthIncreases(depths: List<Int>): Int {
-        var total = 0;
-        for (i in 0 until depths.size - 3) {
-            if (depths[i] < depths[i + 3]) {
-                total++;
-            }
-        }
-        return total;
-    }
+    fun getNumberOfWindowDepthIncreases(depths: List<Int>): Int = countWindowIncreases(depths, 4)
+
+    private fun countWindowIncreases(depths: List<Int>, windowSize: Int) =
+        depths.windowed(windowSize).count { it.first() < it.last() }
 
     fun part1(): Int {
         val input = File("src/main/kotlin/day01/input.txt").readLines().map { it.toInt() }
