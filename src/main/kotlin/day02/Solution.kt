@@ -16,7 +16,7 @@ class Solution {
 
     private data class Instruction(val direction: String, val distance: Int)
 
-    private data class Result(val horizontal: Int, val depth: Int, val aim: Int = 0) {
+    private data class Result(val horizontal: Int, val depth: Int) {
         fun calculateFinalValue() = horizontal * depth
     }
 
@@ -25,12 +25,34 @@ class Solution {
 
         fun process(instruction: Instruction): Result2 {
            return when (instruction.direction) {
-                "up" -> Result2(this.horizontal, this.depth, this.aim - instruction.distance)
-                "down" -> Result2(this.horizontal, this.depth, this.aim + instruction.distance )
-                "forward" -> Result2(this.horizontal + instruction.distance, this.depth + this.aim * instruction.distance, this.aim)
+                "up" -> UpCommand(instruction.distance)
+                "down" -> DownCommand(instruction.distance)
+                "forward" -> ForwardCommand(instruction.distance)
                 else -> throw IllegalArgumentException("Unknown direction: ${instruction.direction}")
-            }
+            }.process(this)
         }
+    }
+
+    private data class UpCommand(val distance: Int): Command {
+        override fun process(state: Result2): Result2 {
+            return Result2(state.horizontal, state.depth, state.aim - distance)
+        }
+    }
+
+    private class DownCommand(val distance: Int): Command {
+        override fun process(state: Result2): Result2 {
+            return Result2(state.horizontal, state.depth, state.aim + distance)
+        }
+    }
+
+    private class ForwardCommand(val distance: Int): Command {
+        override fun process(state: Result2): Result2 {
+            return Result2(state.horizontal + distance, state.depth + state.aim * distance, state.aim)
+        }
+    }
+
+    private interface Command {
+        fun process(state: Result2): Result2
     }
 
     fun navigate2(input: List<String>) =
