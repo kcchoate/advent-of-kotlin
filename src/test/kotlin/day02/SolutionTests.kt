@@ -8,6 +8,18 @@ class SolutionTests {
     private val sut = Solution()
 
     @Test
+    fun `given example, we return the correct answer`() {
+        // arrange
+        val input = listOf("forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2")
+
+        // act
+        val result = sut.navigate2(input)
+
+        // assert
+        assertEquals(900, result)
+    }
+
+    @Test
     fun `given forward movement without depth change, we return 0`() {
         // arrange
         val input = listOf("forward 5")
@@ -62,5 +74,14 @@ class SolutionTests {
         val result = sut.navigate(input)
 
         assertEquals(1427868, result)
+    }
+
+    @Test
+    fun `answer to part 2`() {
+        val input = File("src/main/kotlin/day02/input.txt").readLines()
+
+        val result = sut.navigate2(input)
+
+        assertEquals(1568138742, result)
     }
 }
