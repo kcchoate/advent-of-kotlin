@@ -14,9 +14,9 @@ class Solution {
             }
             .calculateFinalValue()
 
-    private class Instruction(val direction: String, val distance: Int)
+    private data class Instruction(val direction: String, val distance: Int)
 
-    private class Result(val horizontal: Int, val depth: Int) {
+    private data class Result(val horizontal: Int, val depth: Int) {
         fun calculateFinalValue() = horizontal * depth
     }
 }
