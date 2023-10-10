@@ -117,6 +117,6 @@ class SolutionTests {
 
         val result =  Solution().solve2(input)
 
-        assertEquals(0, result)
+        assertEquals(1662846, result)
     }
 }

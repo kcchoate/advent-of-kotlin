@@ -29,25 +29,18 @@ class Solution {
     }
 
     fun getOxygenGeneratorRating(input: List<String>): Int {
-        var filtered = input;
-
-        for(i in 0..<input[0].length) {
-            val sums = countArray(filtered)
-            filtered = filtered.stream().filter{ it[i].toString().toInt() == moreCommon(sums[i], filtered) }.toList()
-            if (filtered.size == 1) {
-                break
-            }
-        }
-
-        return filtered[0].toInt(2);
+        return filter(input) { value, moreCommon -> value == moreCommon }
     }
 
     fun getCO2ScrubberRating(input: List<String>): Int {
-        var filtered = input;
+        return filter(input) { value, moreCommon -> value != moreCommon }
+    }
 
+    private fun filter(input:List<String>, predicate: (Int, Int) -> Boolean): Int {
+        val filtered = input.toMutableList();
         for(i in 0..<input[0].length) {
             val sums = countArray(filtered)
-            filtered = filtered.stream().filter{ it[i].toString().toInt() != moreCommon(sums[i], filtered) }.toList()
+            filtered.retainAll { predicate.invoke(it[i].toString().toInt(), moreCommon(sums[i], filtered)) }
             if (filtered.size == 1) {
                 break
             }
