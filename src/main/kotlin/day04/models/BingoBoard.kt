@@ -26,4 +26,12 @@ class BingoBoard(input: String) {
 
         return false
     }
+
+    fun isWinner(): Boolean {
+        if(board.any{ row -> row.all { it.isMarked } }) {
+            return true
+        }
+
+        return false
+    }
 }

@@ -10,4 +10,14 @@ class BingoGame(input: String) {
         numbers = foo[0].split(',').map { it.toInt() }
         boards = foo.drop(1).map { BingoBoard(it) }
     }
+
+    fun play(): Unit {
+        while (!gameIsOver()) {
+
+        }
+    }
+
+    private fun gameIsOver(): Boolean {
+        return boards.any { it.isWinner() }
+    }
 }
