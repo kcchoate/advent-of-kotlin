@@ -1,23 +1,35 @@
 package day04.models
 
+import java.util.*
+
 // was his name-o
 class BingoGame(input: String) {
-    val numbers: List<Int>
+    val numbers: Queue<Int>
     val boards: List<BingoBoard>
 
     init {
         val foo = input.split("\n\n")
-        numbers = foo[0].split(',').map { it.toInt() }
+        numbers = LinkedList(foo[0].split(',').map { it.toInt() })
         boards = foo.drop(1).map { BingoBoard(it) }
     }
 
-    fun play(): Unit {
+    fun play() {
         while (!gameIsOver()) {
-
+            playRound()
         }
     }
 
+    fun getWinner(): Optional<BingoBoard> {
+        val winningBoard: BingoBoard = boards.firstOrNull { it.isWinner() } ?: return Optional.empty()
+        return Optional.of(winningBoard)
+    }
+
     private fun gameIsOver(): Boolean {
-        return boards.any { it.isWinner() }
+        return boards.any { it.isWinner() } || numbers.isEmpty()
+    }
+
+    private fun playRound() {
+        val number = numbers.remove()
+        boards.forEach { it.markBoard(number) }
     }
 }
