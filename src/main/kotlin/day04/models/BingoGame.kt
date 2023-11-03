@@ -13,10 +13,14 @@ class BingoGame(input: String) {
         boards = foo.drop(1).map { BingoBoard(it) }
     }
 
-    fun play() {
+    fun play(): Int {
+        var lastNumber = 0
+
         while (!gameIsOver()) {
-            playRound()
+            lastNumber = playRound()
         }
+
+        return lastNumber
     }
 
     fun getWinner(): Optional<BingoBoard> {
@@ -28,8 +32,9 @@ class BingoGame(input: String) {
         return boards.any { it.isWinner() } || numbers.isEmpty()
     }
 
-    private fun playRound() {
+    private fun playRound(): Int {
         val number = numbers.remove()
         boards.forEach { it.markBoard(number) }
+        return number
     }
 }

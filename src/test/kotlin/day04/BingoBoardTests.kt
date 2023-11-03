@@ -3,6 +3,7 @@ package day04
 import day04.models.BingoBoard
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -133,5 +134,35 @@ class BingoBoardTests {
         sut.markBoard(19)
 
         assertTrue(sut.isWinner())
+    }
+
+    @Test
+    fun `it should return the sum of unmarked numbers multiplied by the last called number`() {
+        val lastCalled = 22
+
+        sut.markBoard(0)
+        sut.markBoard(13)
+        sut.markBoard(17)
+        sut.markBoard(11)
+        sut.markBoard(lastCalled)
+
+        val score = sut.getScore(lastCalled)
+
+        assertEquals(5214, score)
+    }
+
+    @Test
+    fun `it should return a 0 score if the last number was 0`() {
+        val lastCalled = 0
+
+        sut.markBoard(22)
+        sut.markBoard(13)
+        sut.markBoard(17)
+        sut.markBoard(11)
+        sut.markBoard(lastCalled)
+
+        val score = sut.getScore(lastCalled)
+
+        assertEquals(0, score)
     }
 }

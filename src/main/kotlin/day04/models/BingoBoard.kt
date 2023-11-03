@@ -40,4 +40,17 @@ class BingoBoard(input: String) {
 
         return false
     }
+
+    fun getScore(lastCalled: Int): Int {
+       val boardSum = board
+           .flatMap { it.asSequence() }
+           .filterOut { it.isMarked }
+           .sumOf { it.value }
+
+       return boardSum * lastCalled
+    }
+
+    private fun <T> List<T>.filterOut(predicate: (T) -> Boolean): List<T> {
+        return this.filterNot(predicate)
+    }
 }
