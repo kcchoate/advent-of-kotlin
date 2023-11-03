@@ -79,4 +79,59 @@ class BingoBoardTests {
 
         assertTrue(sut.isWinner())
     }
+
+    @Test
+    fun `it should be a winner if the first column is marked`() {
+        sut.markBoard(22)
+        sut.markBoard(8)
+        sut.markBoard(21)
+        sut.markBoard(6)
+        sut.markBoard(1)
+
+        assertTrue(sut.isWinner())
+    }
+
+    @Test
+    fun `it should be a winner if the second column is marked`() {
+        sut.markBoard(13)
+        sut.markBoard(2)
+        sut.markBoard(9)
+        sut.markBoard(10)
+        sut.markBoard(12)
+
+        assertTrue(sut.isWinner())
+    }
+
+    @Test
+    fun `it should be a winner if the third column is marked`() {
+        sut.markBoard(17)
+        sut.markBoard(23)
+        sut.markBoard(14)
+        sut.markBoard(3)
+        sut.markBoard(20)
+
+        assertTrue(sut.isWinner())
+    }
+
+    @Test
+    fun `it should be a winner if the fourth column is marked`() {
+        sut.markBoard(11)
+        sut.markBoard(4)
+        sut.markBoard(16)
+        sut.markBoard(18)
+        sut.markBoard(15)
+
+        assertTrue(sut.isWinner())
+    }
+
+    @Test
+    fun `it should be a winner if the fifth column is marked`() {
+        sut.markBoard(0)
+        sut.markBoard(24)
+        sut.markBoard(7)
+        sut.markBoard(5)
+        sut.markBoard(19)
+
+        assertTrue(sut.isWinner())
+    }
 }

@@ -28,8 +28,14 @@ class BingoBoard(input: String) {
     }
 
     fun isWinner(): Boolean {
-        if(board.any{ row -> row.all { it.isMarked } }) {
+        if (board.any{ row -> row.all { it.isMarked } }) {
             return true
+        }
+
+        for (col in 0..4) {
+            if (board.all { it[col].isMarked }) {
+                return true
+            }
         }
 
         return false
